@@ -52,9 +52,10 @@ struct ItemView: View {
                     }
                 }
             }
-            .background(Color(.systemGroupedBackground)) // Add background color
+            .background(Color(.systemGroupedBackground))
+            .navigationBarBackButtonHidden(isEditing)
             .navigationTitle(navigationTitle)
-            .navigationBarTitleDisplayMode(.inline) // Customize navigation title display
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 // Add custom toolbar buttons
                 ToolbarItem(placement: .navigationBarTrailing) {
