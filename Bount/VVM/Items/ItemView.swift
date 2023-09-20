@@ -13,7 +13,8 @@ struct ItemView: View {
     @StateObject var viewModel = ItemVM()
     
     @State private var isEditing = false
-    @State private var editedPrice: String = ""
+    @State private var editedName: String = ""
+    @State private var editedPrice: Int = 0
     @State private var editedType: ItemType = .VODKA
     
     @State var item: Item
@@ -28,14 +29,36 @@ struct ItemView: View {
                 Section(header: Text("Item ID").font(.headline)) {
                     Text(item.id ?? "").font(.subheadline)
                 }
+                
+                Section(header: Text("Item Name").font(.headline)) {
+                    if isEditing {
+                        TextField("Name", text: Binding(
+                            get: { editedName },
+                            set: { newValue in
+                                editedName = newValue
+                            }
+                        ))
+                    } else {
+                        Text(item.name)
+                            .font(.subheadline)
+                    }
+                }
 
                 Section(header: Text("Item Price").font(.headline)) {
                     if isEditing {
-                        TextField("Price", text: $editedPrice)
-                            .keyboardType(.decimalPad)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        TextField("Price", text: Binding(
+                            get: { String(editedPrice) },
+                            set: {
+                                if let newValue = Int($0) {
+                                    editedPrice = newValue
+                                }
+                            }
+                        ))
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     } else {
-                        Text("$ \(item.price ?? 0)").font(.subheadline)
+                        Text("$ \(item.price ?? 0)")
+                            .font(.subheadline)
                     }
                 }
 
@@ -47,6 +70,7 @@ struct ItemView: View {
                                     .tag(type)
                             }
                         }
+                        .pickerStyle(.navigationLink)
                     } else {
                         Text(item.type.rawValue).font(.subheadline)
                     }
@@ -64,6 +88,7 @@ struct ItemView: View {
                             // Save changes to Firestore and exit edit mode
                             viewModel.saveChanges(
                                 item: &item,
+                                editedName: editedName,
                                 editedPrice: editedPrice,
                                 editedType: editedType) { success in
                                     if success {
@@ -74,7 +99,8 @@ struct ItemView: View {
                             // Enter edit mode
                             isEditing.toggle()
                             // Initialize edited fields with the current values
-                            editedPrice = "\(item.price ?? 0)"
+                            editedName = item.name
+                            editedPrice = item.price ?? 0
                             editedType = item.type
                         }
                     }) {

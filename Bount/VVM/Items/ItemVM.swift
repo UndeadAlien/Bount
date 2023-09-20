@@ -10,14 +10,15 @@ import FirebaseFirestore
 
 class ItemVM : ObservableObject {
     
-    func saveChanges(item: inout Item, editedPrice: String, editedType: ItemType, completion: @escaping (Bool) -> Void) {
+    func saveChanges(item: inout Item, editedName: String, editedPrice: Int, editedType: ItemType, completion: @escaping (Bool) -> Void) {
         // Update Firestore with edited values
-        guard let price = Int(editedPrice) else {
+        guard editedPrice >= 0 else {
             completion(false)
             return
         }
 
-        item.price = price
+        item.name = editedName
+        item.price = editedPrice
         item.type = editedType
 
         // Get a reference to your Firestore database
@@ -32,6 +33,7 @@ class ItemVM : ObservableObject {
 
         // Create a data dictionary with the updated values
         let updatedData: [String: Any] = [
+            "name": item.name,
             "price": item.price ?? 0,
             "type": item.type.rawValue
         ]
