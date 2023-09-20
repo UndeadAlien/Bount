@@ -67,52 +67,6 @@ struct AddVendorView: View {
     }
 }
 
-struct ItemSelectionView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
-    @Binding var selectedItems: Set<Item>
-    let items: [Item]
-    
-    var body: some View {
-        NavigationView {
-            List(items, id: \.self) { item in
-                MultipleSelectionRow(
-                    title: item.name,
-                    isSelected: Binding(
-                        get: { self.selectedItems.contains(item) },
-                        set: { newValue in
-                            if newValue {
-                                self.selectedItems.insert(item)
-                            } else {
-                                self.selectedItems.remove(item)
-                            }
-                        }
-                    )
-                )
-            }
-            .navigationBarTitle("Select Items")
-            .navigationBarItems(
-                trailing: Button("Done") {
-                    // Dismiss the sheet when the "Done" button is tapped
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            )
-        }
-    }
-}
-
-
-struct MultipleSelectionRow: View {
-    var title: String
-    var isSelected: Binding<Bool>
-
-    var body: some View {
-        Toggle(isOn: isSelected) {
-            Text(title)
-        }
-    }
-}
-
 struct AddVendorView_Previews: PreviewProvider {
     static var previews: some View {
         AddVendorView()

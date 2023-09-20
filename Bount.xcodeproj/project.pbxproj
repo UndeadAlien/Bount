@@ -19,6 +19,8 @@
 		B825FFDA2AB9F9DC00EA8985 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B825FFD92AB9F9DC00EA8985 /* .gitignore */; };
 		B825FFDC2ABAB7FC00EA8985 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */; };
 		B825FFDE2ABAB84A00EA8985 /* ItemListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */; };
+		B825FFE02ABB695300EA8985 /* VendorInventoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFDF2ABB695300EA8985 /* VendorInventoryVM.swift */; };
+		B825FFE22ABB7DFC00EA8985 /* ItemSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFE12ABB7DFC00EA8985 /* ItemSelectionView.swift */; };
 		B848E7EE2AA258F700D0FFBD /* TabBarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7ED2AA258F700D0FFBD /* TabBarVM.swift */; };
 		B848E7F42AA6669E00D0FFBD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F32AA6669E00D0FFBD /* ProfileView.swift */; };
 		B848E7F82AA666BF00D0FFBD /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F72AA666BF00D0FFBD /* ProfileVM.swift */; };
@@ -61,6 +63,8 @@
 		B825FFD92AB9F9DC00EA8985 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListVM.swift; sourceTree = "<group>"; };
+		B825FFDF2ABB695300EA8985 /* VendorInventoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInventoryVM.swift; sourceTree = "<group>"; };
+		B825FFE12ABB7DFC00EA8985 /* ItemSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSelectionView.swift; sourceTree = "<group>"; };
 		B848E7ED2AA258F700D0FFBD /* TabBarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVM.swift; sourceTree = "<group>"; };
 		B848E7F32AA6669E00D0FFBD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B848E7F72AA666BF00D0FFBD /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 				B89823C32A9BD96700D91663 /* VendorView.swift */,
 				B848E7FB2AA6783900D0FFBD /* VendorVM.swift */,
 				B825FFD12AB8CFE800EA8985 /* VendorInventoryView.swift */,
+				B825FFDF2ABB695300EA8985 /* VendorInventoryVM.swift */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 				B8AE6CE12AB28429005A7D30 /* ItemVM.swift */,
 				B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */,
 				B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */,
+				B825FFE12ABB7DFC00EA8985 /* ItemSelectionView.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 				B848E7EE2AA258F700D0FFBD /* TabBarVM.swift in Sources */,
 				B825FFD82AB9D38A00EA8985 /* AddVendorVM.swift in Sources */,
 				B8B757AF2A9A879100615BCB /* BountApp.swift in Sources */,
+				B825FFE02ABB695300EA8985 /* VendorInventoryVM.swift in Sources */,
 				B848E7FC2AA6783900D0FFBD /* VendorVM.swift in Sources */,
 				B8168D802AB7FDFA00E8AD46 /* Inventory.swift in Sources */,
 				B825FFCE2AB8C0E300EA8985 /* AddCountVM.swift in Sources */,
@@ -355,6 +362,7 @@
 				B8AE6CDB2AB23E8E005A7D30 /* AddItemVM.swift in Sources */,
 				B848E7FA2AA6761E00D0FFBD /* Item.swift in Sources */,
 				B89823CC2A9BDA9700D91663 /* LoginView.swift in Sources */,
+				B825FFE22ABB7DFC00EA8985 /* ItemSelectionView.swift in Sources */,
 				B89823CA2A9BDA8700D91663 /* User.swift in Sources */,
 				B825FFDC2ABAB7FC00EA8985 /* ItemListView.swift in Sources */,
 				B825FFD22AB8CFE900EA8985 /* VendorInventoryView.swift in Sources */,
