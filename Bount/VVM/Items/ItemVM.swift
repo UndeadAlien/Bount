@@ -10,6 +10,13 @@ import FirebaseFirestore
 
 class ItemVM : ObservableObject {
     
+    @Published var isEditing = false
+    @Published var editedName: String = ""
+    @Published var editedPrice: Int = 0
+    @Published var editedType: ItemType = .VODKA
+    
+    @Published var showingDeleteConfirmationAlert = false
+    
     func saveChanges(item: inout Item, editedName: String, editedPrice: Int, editedType: ItemType, completion: @escaping (Bool) -> Void) {
         // Update Firestore with edited values
         guard editedPrice >= 0 else {
@@ -48,6 +55,27 @@ class ItemVM : ObservableObject {
                 // Document updated successfully
                 print("Document updated successfully!")
                 completion(true)
+            }
+        }
+    }
+    
+    func deleteAction(item: Item, completion: @escaping (Bool) -> Void) {
+        guard let itemId = item.id else {
+            completion(false)
+            return // Item does not have an ID, so it cannot be deleted
+        }
+
+        // Reference to the Firestore collection containing items
+        let itemsCollection = Firestore.firestore().collection("items")
+
+        // Delete the item from Firestore
+        itemsCollection.document(itemId).delete { error in
+            if let error = error {
+                completion(false)
+                print("Error deleting item: \(error.localizedDescription)")
+            } else {
+                completion(true)
+                print("Item deleted successfully!")
             }
         }
     }

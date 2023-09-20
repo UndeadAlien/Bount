@@ -12,115 +12,150 @@ import FirebaseFirestoreSwift
 struct ItemView: View {
     @StateObject var viewModel = ItemVM()
     
-    @State private var isEditing = false
-    @State private var editedName: String = ""
-    @State private var editedPrice: Int = 0
-    @State private var editedType: ItemType = .VODKA
-    
     @State var item: Item
     
+    @Environment(\.presentationMode) var presentationMode
+    
     var navigationTitle: String {
-        return isEditing ? "Edit Mode" : item.name
+        return viewModel.isEditing ? "Edit Mode" : item.name
     }
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section(header: Text("Item ID").font(.headline)) {
-                    Text(item.id ?? "").font(.subheadline)
+            itemForm
+            
+            deleteButton
+        }
+    }
+    
+    var deleteButton: some View {
+        VStack {
+            if viewModel.isEditing {
+                Button(action: {
+                    viewModel.showingDeleteConfirmationAlert = true
+                }) {
+                    Text("Delete")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.red)
+                        .padding()
                 }
-                
-                Section(header: Text("Item Name").font(.headline)) {
-                    if isEditing {
-                        TextField("Name", text: Binding(
-                            get: { editedName },
-                            set: { newValue in
-                                editedName = newValue
-                            }
-                        ))
-                    } else {
-                        Text(item.name)
-                            .font(.subheadline)
-                    }
-                }
-
-                Section(header: Text("Item Price").font(.headline)) {
-                    if isEditing {
-                        TextField("Price", text: Binding(
-                            get: { String(editedPrice) },
-                            set: {
-                                if let newValue = Int($0) {
-                                    editedPrice = newValue
+                .alert(isPresented: $viewModel.showingDeleteConfirmationAlert) {
+                    Alert(
+                        title: Text("Confirmation"),
+                        message: Text("Are you sure you want to delete this item?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            viewModel.deleteAction(item: item) { success in
+                                if success {
+                                    viewModel.showingDeleteConfirmationAlert = false
                                 }
                             }
-                        ))
-                        .keyboardType(.decimalPad)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    } else {
-                        Text("$ \(item.price ?? 0)")
-                            .font(.subheadline)
-                    }
-                }
-
-                Section(header: Text("Item Type").font(.headline)) {
-                    if isEditing {
-                        Picker("Type", selection: $editedType) {
-                            ForEach(ItemType.allCases, id: \.self) { type in
-                                Text(type.rawValue)
-                                    .tag(type)
-                            }
-                        }
-                        .pickerStyle(.navigationLink)
-                    } else {
-                        Text(item.type.rawValue).font(.subheadline)
-                    }
+                            
+                            presentationMode.wrappedValue.dismiss()
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
-            .background(Color(.systemGroupedBackground))
-            .navigationBarBackButtonHidden(isEditing)
-            .navigationTitle(navigationTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                // Add custom toolbar buttons
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        if isEditing {
-                            // Save changes to Firestore and exit edit mode
-                            viewModel.saveChanges(
-                                item: &item,
-                                editedName: editedName,
-                                editedPrice: editedPrice,
-                                editedType: editedType) { success in
-                                    if success {
-                                        isEditing.toggle()
-                                    }
-                                }
-                        } else {
-                            // Enter edit mode
-                            isEditing.toggle()
-                            // Initialize edited fields with the current values
-                            editedName = item.name
-                            editedPrice = item.price ?? 0
-                            editedType = item.type
+        }
+    }
+    
+    var itemForm: some View {
+        Form {
+            Section(header: Text("Item ID").font(.headline)) {
+                Text(item.id ?? "").font(.subheadline)
+            }
+            
+            Section(header: Text("Item Name").font(.headline)) {
+                if viewModel.isEditing {
+                    TextField("Name", text: Binding(
+                        get: { viewModel.editedName },
+                        set: { newValue in
+                            viewModel.editedName = newValue
                         }
-                    }) {
-                        Text(isEditing ? "Save" : "Edit")
-                            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(8) // Add rounded corners
-                    }
+                    ))
+                } else {
+                    Text(item.name)
+                        .font(.subheadline)
                 }
+            }
 
-                ToolbarItem(placement: .navigationBarLeading) {
-                    // Add a "Cancel" button to exit edit mode
-                    if isEditing {
-                        Button("Cancel") {
-                            // Exit edit mode without saving changes
-                            isEditing.toggle()
+            Section(header: Text("Item Price").font(.headline)) {
+                if viewModel.isEditing {
+                    TextField("Price", text: Binding(
+                        get: { String(viewModel.editedPrice) },
+                        set: {
+                            if let newValue = Int($0) {
+                                viewModel.editedPrice = newValue
+                            }
                         }
-                        .foregroundColor(.blue)
+                    ))
+                    .keyboardType(.decimalPad)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                } else {
+                    Text("$ \(item.price ?? 0)")
+                        .font(.subheadline)
+                }
+            }
+
+            Section(header: Text("Item Type").font(.headline)) {
+                if viewModel.isEditing {
+                    Picker("Type", selection: $viewModel.editedType) {
+                        ForEach(ItemType.allCases, id: \.self) { type in
+                            Text(type.rawValue)
+                                .tag(type)
+                        }
                     }
+                    .pickerStyle(.navigationLink)
+                } else {
+                    Text(item.type.rawValue).font(.subheadline)
+                }
+            }
+        }
+        .background(Color(.systemGroupedBackground))
+        .navigationBarBackButtonHidden(viewModel.isEditing)
+        .navigationTitle(navigationTitle)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            // Add custom toolbar buttons
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    if viewModel.isEditing {
+                        // Save changes to Firestore and exit edit mode
+                        viewModel.saveChanges(
+                            item: &item,
+                            editedName: viewModel.editedName,
+                            editedPrice: viewModel.editedPrice,
+                            editedType: viewModel.editedType) { success in
+                                if success {
+                                    viewModel.isEditing.toggle()
+                                }
+                            }
+                    } else {
+                        // Enter edit mode
+                        viewModel.isEditing.toggle()
+                        // Initialize edited fields with the current values
+                        viewModel.editedName = item.name
+                        viewModel.editedPrice = item.price ?? 0
+                        viewModel.editedType = item.type
+                    }
+                }) {
+                    Text(viewModel.isEditing ? "Save" : "Edit")
+                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8) // Add rounded corners
+                }
+            }
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                // Add a "Cancel" button to exit edit mode
+                if viewModel.isEditing {
+                    Button("Cancel") {
+                        // Exit edit mode without saving changes
+                        viewModel.isEditing.toggle()
+                    }
+                    .foregroundColor(.blue)
                 }
             }
         }
