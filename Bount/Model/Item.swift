@@ -5,7 +5,6 @@
 //  Created by Connor Hutchinson on 9/4/23.
 //
 
-import Foundation
 import FirebaseFirestoreSwift
 
 extension ItemType: Identifiable {

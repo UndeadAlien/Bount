@@ -26,7 +26,7 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Vendors", systemImage: "person.fill")
                 }
-            ItemView()
+            ItemListView()
                 .tabItem {
                     Label("Items", systemImage: "bag.fill")
                 }

@@ -5,7 +5,6 @@
 //  Created by Connor Hutchinson on 8/27/23.
 //
 
-import Foundation
 import FirebaseFirestoreSwift
 
 struct Vendor: Identifiable, Codable, Hashable {

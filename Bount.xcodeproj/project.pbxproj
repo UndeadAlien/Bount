@@ -17,6 +17,8 @@
 		B825FFD62AB95CB200EA8985 /* CountHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFD52AB95CB200EA8985 /* CountHistoryVM.swift */; };
 		B825FFD82AB9D38A00EA8985 /* AddVendorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFD72AB9D38A00EA8985 /* AddVendorVM.swift */; };
 		B825FFDA2AB9F9DC00EA8985 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B825FFD92AB9F9DC00EA8985 /* .gitignore */; };
+		B825FFDC2ABAB7FC00EA8985 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */; };
+		B825FFDE2ABAB84A00EA8985 /* ItemListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */; };
 		B848E7EE2AA258F700D0FFBD /* TabBarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7ED2AA258F700D0FFBD /* TabBarVM.swift */; };
 		B848E7F42AA6669E00D0FFBD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F32AA6669E00D0FFBD /* ProfileView.swift */; };
 		B848E7F82AA666BF00D0FFBD /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F72AA666BF00D0FFBD /* ProfileVM.swift */; };
@@ -57,6 +59,8 @@
 		B825FFD52AB95CB200EA8985 /* CountHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountHistoryVM.swift; sourceTree = "<group>"; };
 		B825FFD72AB9D38A00EA8985 /* AddVendorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVendorVM.swift; sourceTree = "<group>"; };
 		B825FFD92AB9F9DC00EA8985 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListVM.swift; sourceTree = "<group>"; };
 		B848E7ED2AA258F700D0FFBD /* TabBarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVM.swift; sourceTree = "<group>"; };
 		B848E7F32AA6669E00D0FFBD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B848E7F72AA666BF00D0FFBD /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 			children = (
 				B8AE6CDF2AB28420005A7D30 /* ItemView.swift */,
 				B8AE6CE12AB28429005A7D30 /* ItemVM.swift */,
+				B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */,
+				B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 				B8B757B12A9A879100615BCB /* TabBarView.swift in Sources */,
 				B8AE6CE02AB28420005A7D30 /* ItemView.swift in Sources */,
 				B8168D832AB8131600E8AD46 /* BreakdownView.swift in Sources */,
+				B825FFDE2ABAB84A00EA8985 /* ItemListVM.swift in Sources */,
 				B825FFD42AB8DA9000EA8985 /* AddVendorView.swift in Sources */,
 				B848E7EE2AA258F700D0FFBD /* TabBarVM.swift in Sources */,
 				B825FFD82AB9D38A00EA8985 /* AddVendorVM.swift in Sources */,
@@ -349,6 +356,7 @@
 				B848E7FA2AA6761E00D0FFBD /* Item.swift in Sources */,
 				B89823CC2A9BDA9700D91663 /* LoginView.swift in Sources */,
 				B89823CA2A9BDA8700D91663 /* User.swift in Sources */,
+				B825FFDC2ABAB7FC00EA8985 /* ItemListView.swift in Sources */,
 				B825FFD22AB8CFE900EA8985 /* VendorInventoryView.swift in Sources */,
 				B8AE6CD92AB23E84005A7D30 /* AddItemView.swift in Sources */,
 				B89823D42A9BEEF900D91663 /* Extensions.swift in Sources */,
