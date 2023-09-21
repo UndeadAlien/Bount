@@ -26,7 +26,6 @@ struct ItemListView: View {
         }
     }
 
-
     var body: some View {
 
         NavigationStack {

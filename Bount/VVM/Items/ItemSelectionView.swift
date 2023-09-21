@@ -13,9 +13,27 @@ struct ItemSelectionView: View {
     @Binding var selectedItems: Set<Item>
     let items: [Item]
     
+    @State var searchText = ""
+    
+    var filteredItems: [Item] {
+        let searchText = searchText.lowercased()
+        if searchText.isEmpty {
+            return items
+        } else {
+            return items.filter { item in
+                let itemName = item.name.lowercased()
+                let itemType = item.type.rawValue.lowercased()
+                return itemName.contains(searchText) || itemType.contains(searchText)
+            }
+        }
+    }
+    
     var body: some View {
-        NavigationView {
-            List(items, id: \.self) { item in
+        NavigationStack {
+            
+            SearchBarView(text: $searchText)
+            
+            List(filteredItems, id: \.self) { item in
                 MultipleSelectionRow(
                     title: item.name,
                     isSelected: Binding(
@@ -36,6 +54,12 @@ struct ItemSelectionView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }
             )
+        }
+    }
+    
+    func filteredItemsForType(_ itemType: ItemType) -> [Item] {
+        return filteredItems.filter { item in
+            return item.type == itemType
         }
     }
 }
