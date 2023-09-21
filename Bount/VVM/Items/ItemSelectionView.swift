@@ -32,21 +32,29 @@ struct ItemSelectionView: View {
         NavigationStack {
             
             SearchBarView(text: $searchText)
-            
-            List(filteredItems, id: \.self) { item in
-                MultipleSelectionRow(
-                    title: item.name,
-                    isSelected: Binding(
-                        get: { self.selectedItems.contains(item) },
-                        set: { newValue in
-                            if newValue {
-                                self.selectedItems.insert(item)
-                            } else {
-                                self.selectedItems.remove(item)
+            Form {
+                ForEach(ItemType.allCases, id: \.rawValue) { itemType in
+                    let itemsForType = filteredItemsForType(itemType)
+                    if !itemsForType.isEmpty {
+                        Section(header: Text(itemType.rawValue)) {
+                            ForEach(itemsForType, id: \.self) { item in
+                                MultipleSelectionRow(
+                                    title: item.name,
+                                    isSelected: Binding(
+                                        get: { self.selectedItems.contains(item) },
+                                        set: { newValue in
+                                            if newValue {
+                                                self.selectedItems.insert(item)
+                                            } else {
+                                                self.selectedItems.remove(item)
+                                            }
+                                        }
+                                    )
+                                )
                             }
                         }
-                    )
-                )
+                    }
+                }
             }
             .navigationBarTitle("Select Items")
             .navigationBarItems(

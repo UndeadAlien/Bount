@@ -17,11 +17,14 @@ struct AddCountView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var filteredItems: [Item] {
-        if viewModel.searchText.isEmpty {
+        let searchText = viewModel.searchText.lowercased()
+        if searchText.isEmpty {
             return items
         } else {
-            return items.filter {
-                $0.name.localizedCaseInsensitiveContains(viewModel.searchText)
+            return items.filter { item in
+                let itemName = item.name.lowercased()
+                let itemType = item.type.rawValue.lowercased()
+                return itemName.contains(searchText) || itemType.contains(searchText)
             }
         }
     }
@@ -32,22 +35,30 @@ struct AddCountView: View {
                 SearchBarView(text: $viewModel.searchText)
 
                 Form {
-                    List(filteredItems, id: \.id) { item in
-                        HStack {
-                            Text(item.name)
-                                .font(.headline)
-                                .foregroundColor(.primary)
+                    ForEach(ItemType.allCases, id: \.rawValue) { itemType in
+                        let itemsForType = filteredItemsForType(itemType)
+                        if !itemsForType.isEmpty {
+                            Section(header: Text(itemType.rawValue)) {
+                                ForEach(itemsForType, id: \.self) { item in
+                                    HStack {
+                                        Text(item.name)
+                                            .font(.headline)
+                                            .foregroundColor(.primary)
 
-                            Spacer()
+                                        Spacer()
 
-                            Stepper(
-                                "\(viewModel.itemCounts[item.id ?? ""] ?? 0)",
-                                value: Binding(
-                                    get: { viewModel.itemCounts[item.id ?? ""] ?? 0 },
-                                    set: { newValue in viewModel.itemCounts[item.id ?? ""] = newValue }
-                                ),
-                                in: 0...Int.max
-                            )
+                                        Stepper(
+                                            "\(viewModel.itemCounts[item.id ?? ""] ?? 0)",
+                                            value: Binding(
+                                                get: { viewModel.itemCounts[item.id ?? ""] ?? 0 },
+                                                set: { newValue in viewModel.itemCounts[item.id ?? ""] = newValue }
+                                            ),
+                                            in: 0...Int.max
+                                        )
+                                        
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -96,6 +107,12 @@ struct AddCountView: View {
                 }
             }
             
+        }
+    }
+    
+    func filteredItemsForType(_ itemType: ItemType) -> [Item] {
+        return filteredItems.filter { item in
+            return item.type == itemType
         }
     }
 }
