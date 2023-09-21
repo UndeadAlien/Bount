@@ -45,7 +45,7 @@ struct ItemView: View {
                         title: Text("Confirmation"),
                         message: Text("Are you sure you want to delete this item?"),
                         primaryButton: .destructive(Text("Delete")) {
-                            viewModel.deleteAction(item: item) { success in
+                            viewModel.deleteItem(item: item) { success in
                                 if success {
                                     viewModel.showingDeleteConfirmationAlert = false
                                 }

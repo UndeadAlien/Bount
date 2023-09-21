@@ -59,7 +59,7 @@ class ItemVM : ObservableObject {
         }
     }
     
-    func deleteAction(item: Item, completion: @escaping (Bool) -> Void) {
+    func deleteItem(item: Item, completion: @escaping (Bool) -> Void) {
         guard let itemId = item.id else {
             completion(false)
             return // Item does not have an ID, so it cannot be deleted

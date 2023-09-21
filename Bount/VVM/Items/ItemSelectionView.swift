@@ -67,3 +67,4 @@ struct ItemSelectionView_Previews: PreviewProvider {
         return ItemSelectionView(selectedItems: selectedItems, items: items)
     }
 }
+

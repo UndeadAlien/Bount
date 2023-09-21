@@ -20,7 +20,7 @@ struct VendorView: View {
             Form {
                 List(vendors, id: \.self) { vendor in
                     VStack {
-                        NavigationLink(destination: VendorInventoryView(vendorID: vendor.id!, inventory: vendor.inventory)) {
+                        NavigationLink(destination: VendorInventoryView(vendor: vendor)) {
                             Text(vendor.name)
                                 .font(.headline)
                                 .foregroundColor(.blue)
