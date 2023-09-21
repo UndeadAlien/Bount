@@ -12,6 +12,9 @@ class AddCountVM: ObservableObject {
     @Published var itemCounts: [String: Int] = [:]
     @Published var searchText = ""
     
+    @Published var showingCancelConfirmationAlert = false
+    @Published var showingSubmitConfirmationAlert = false
+    
     init() {}
     
     func uploadCountsToFirestore(completion: @escaping (Bool) -> Void) {

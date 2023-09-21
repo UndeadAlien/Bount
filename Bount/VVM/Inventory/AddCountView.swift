@@ -56,21 +56,41 @@ struct AddCountView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Cancel") {
-                            presentationMode.wrappedValue.dismiss()
-                            viewModel.reset()
+                            viewModel.showingCancelConfirmationAlert = true
+                        }
+                        .alert(isPresented: $viewModel.showingCancelConfirmationAlert) {
+                            Alert(
+                                title: Text("Confirmation"),
+                                message: Text("Are you sure you want to cancel this item?"),
+                                primaryButton: .destructive(Text("Cancel")) {
+                                    presentationMode.wrappedValue.dismiss()
+                                    viewModel.reset()
+                                },
+                                secondaryButton: .cancel()
+                            )
                         }
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
-                            viewModel.uploadCountsToFirestore { success in
-                                if success {
-                                    presentationMode.wrappedValue.dismiss()
-                                    viewModel.reset()
-                                }
-                            }
+                            viewModel.showingSubmitConfirmationAlert = true
                         }) {
                             Text("Submit")
+                        }
+                        .alert(isPresented: $viewModel.showingSubmitConfirmationAlert) {
+                            Alert(
+                                title: Text("Confirmation"),
+                                message: Text("Are you sure you want to submit the inventory count?"),
+                                primaryButton: .destructive(Text("Submit")) {
+                                    viewModel.uploadCountsToFirestore { success in
+                                        if success {
+                                            presentationMode.wrappedValue.dismiss()
+                                            viewModel.reset()
+                                        }
+                                    }
+                                },
+                                secondaryButton: .cancel()
+                            )
                         }
                     }
                 }
