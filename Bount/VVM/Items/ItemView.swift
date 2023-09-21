@@ -74,6 +74,8 @@ struct ItemView: View {
                             viewModel.editedName = newValue
                         }
                     ))
+                    .keyboardType(.alphabet)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 } else {
                     Text(item.name)
                         .font(.subheadline)
@@ -108,7 +110,8 @@ struct ItemView: View {
                     }
                     .pickerStyle(.navigationLink)
                 } else {
-                    Text(item.type.rawValue).font(.subheadline)
+                    Text(item.type.rawValue)
+                        .font(.subheadline)
                 }
             }
         }
