@@ -13,15 +13,35 @@ struct ItemListView: View {
     
     @FirestoreQuery(collectionPath: "items") var items: [Item]
     
+    var filteredItems: [Item] {
+        let searchText = viewModel.searchText.lowercased()
+        if searchText.isEmpty {
+            return items
+        } else {
+            return items.filter { item in
+                let itemName = item.name.lowercased()
+                let itemType = item.type.rawValue.lowercased()
+                return itemName.contains(searchText) || itemType.contains(searchText)
+            }
+        }
+    }
+
+
     var body: some View {
 
         NavigationStack {
+            
+            SearchBarView(text: $viewModel.searchText)
+            
             List {
                 ForEach(ItemType.allCases, id: \.rawValue) { itemType in
-                    Section(header: Text(itemType.rawValue)) {
-                        ForEach(filteredItems(for: itemType), id: \.self) { item in
-                            NavigationLink(destination: ItemView(item: item)) {
-                                Text("\(item.name)")
+                    let itemsForType = filteredItemsForType(itemType)
+                    if !itemsForType.isEmpty {
+                        Section(header: Text(itemType.rawValue)) {
+                            ForEach(itemsForType, id: \.self) { item in
+                                NavigationLink(destination: ItemView(item: item)) {
+                                    Text("\(item.name)")
+                                }
                             }
                         }
                     }
@@ -38,9 +58,9 @@ struct ItemListView: View {
         }
     }
 
-    func filteredItems(for itemType: ItemType) -> [Item] {
-        return items.filter { item in
-            return item.type.rawValue == itemType.rawValue
+    func filteredItemsForType(_ itemType: ItemType) -> [Item] {
+        return filteredItems.filter { item in
+            return item.type == itemType
         }
     }
 }

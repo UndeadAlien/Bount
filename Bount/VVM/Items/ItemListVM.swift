@@ -9,7 +9,7 @@ import Foundation
 
 class ItemListVM : ObservableObject {
     
-    
+    @Published var searchText = ""
     
     init() {}
     

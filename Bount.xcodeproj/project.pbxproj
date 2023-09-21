@@ -22,6 +22,7 @@
 		B825FFE02ABB695300EA8985 /* VendorInventoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFDF2ABB695300EA8985 /* VendorInventoryVM.swift */; };
 		B825FFE22ABB7DFC00EA8985 /* ItemSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFE12ABB7DFC00EA8985 /* ItemSelectionView.swift */; };
 		B825FFE62ABC009900EA8985 /* CSVtoFirebaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFE52ABC009900EA8985 /* CSVtoFirebaseView.swift */; };
+		B825FFED2ABC1CB800EA8985 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825FFEC2ABC1CB800EA8985 /* SearchBarView.swift */; };
 		B848E7EE2AA258F700D0FFBD /* TabBarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7ED2AA258F700D0FFBD /* TabBarVM.swift */; };
 		B848E7F42AA6669E00D0FFBD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F32AA6669E00D0FFBD /* ProfileView.swift */; };
 		B848E7F82AA666BF00D0FFBD /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F72AA666BF00D0FFBD /* ProfileVM.swift */; };
@@ -67,6 +68,7 @@
 		B825FFDF2ABB695300EA8985 /* VendorInventoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorInventoryVM.swift; sourceTree = "<group>"; };
 		B825FFE12ABB7DFC00EA8985 /* ItemSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSelectionView.swift; sourceTree = "<group>"; };
 		B825FFE52ABC009900EA8985 /* CSVtoFirebaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVtoFirebaseView.swift; sourceTree = "<group>"; };
+		B825FFEC2ABC1CB800EA8985 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		B848E7ED2AA258F700D0FFBD /* TabBarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVM.swift; sourceTree = "<group>"; };
 		B848E7F32AA6669E00D0FFBD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B848E7F72AA666BF00D0FFBD /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
@@ -119,6 +121,14 @@
 				B825FFCD2AB8C0E300EA8985 /* AddCountVM.swift */,
 			);
 			path = Inventory;
+			sourceTree = "<group>";
+		};
+		B825FFEB2ABC1CA200EA8985 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				B825FFEC2ABC1CB800EA8985 /* SearchBarView.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		B848E7FF2AA7A7A600D0FFBD /* VVM */ = {
@@ -218,6 +228,7 @@
 		B8B757AD2A9A879100615BCB /* Bount */ = {
 			isa = PBXGroup;
 			children = (
+				B825FFEB2ABC1CA200EA8985 /* Util */,
 				B8B757BD2A9A888100615BCB /* Model */,
 				B848E7FF2AA7A7A600D0FFBD /* VVM */,
 				B8B757C02A9A8C1F00615BCB /* Other */,
@@ -349,6 +360,7 @@
 				B825FFE62ABC009900EA8985 /* CSVtoFirebaseView.swift in Sources */,
 				B89823C62A9BD97C00D91663 /* Vendor.swift in Sources */,
 				B89823D22A9BEB1200D91663 /* RegistrationVM.swift in Sources */,
+				B825FFED2ABC1CB800EA8985 /* SearchBarView.swift in Sources */,
 				B8B757B12A9A879100615BCB /* TabBarView.swift in Sources */,
 				B8AE6CE02AB28420005A7D30 /* ItemView.swift in Sources */,
 				B8168D832AB8131600E8AD46 /* BreakdownView.swift in Sources */,

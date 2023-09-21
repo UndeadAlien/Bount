@@ -29,7 +29,7 @@ struct AddCountView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                SearchBar(text: $viewModel.searchText)
+                SearchBarView(text: $viewModel.searchText)
 
                 Form {
                     List(filteredItems, id: \.id) { item in
@@ -96,26 +96,6 @@ struct AddCountView: View {
                 }
             }
             
-        }
-    }
-}
-
-struct SearchBar: View {
-    @Binding var text: String
-
-    var body: some View {
-        HStack {
-            TextField("Search", text: $text)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
-
-            Button(action: {
-                text = ""
-            }) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.gray)
-                    .padding(.trailing)
-            }
         }
     }
 }
