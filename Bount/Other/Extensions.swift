@@ -22,4 +22,17 @@ extension Encodable {
             return [:]
         }
     }
+    
+    func itemToDictionary(item: Item) -> [String: Any] {
+        var dictionary: [String: Any] = [
+            "name": item.name,
+            "type": item.type.rawValue
+        ]
+
+        if let price = item.price {
+            dictionary["price"] = item.price
+        }
+
+        return dictionary
+    }
 }

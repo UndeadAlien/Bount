@@ -26,6 +26,7 @@ enum ItemType : String, Codable, CaseIterable {
     case FRUIT
     case SUPPLIES
     case FOOD
+    case UNKNOWN
 }
 
 struct Item : Identifiable, Codable, Equatable, Hashable {
