@@ -9,6 +9,17 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+extension Timestamp: Comparable {
+    public static func < (lhs: Timestamp, rhs: Timestamp) -> Bool {
+        return lhs.dateValue() < rhs.dateValue()
+    }
+    
+    public static func == (lhs: Timestamp, rhs: Timestamp) -> Bool {
+        return lhs.dateValue() == rhs.dateValue()
+    }
+}
+
+
 struct CountHistoryView: View {
     @StateObject var viewModel = CountHistoryVM()
 
@@ -36,7 +47,7 @@ struct CountHistoryListView: View {
     var body: some View {
         Form {
             List {
-                ForEach(viewModel.countHistory, id: \.id) { inventoryCount in
+                ForEach(viewModel.countHistory.sorted(by: { ($1.date ?? Timestamp()) < ($0.date ?? Timestamp()) }), id: \.id) { inventoryCount in
                     CountHistoryRowView(
                         viewModel: viewModel,
                         inventoryCount: inventoryCount

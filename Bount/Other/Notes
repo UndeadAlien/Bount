@@ -1,9 +1,3 @@
-- When an
-    - Item
-    - Vendor
-    - Inventory Count
-- is submitted, check for key empty fields and return an error before uploading
-
 - Add ItemType to database and make it editable
 
 - Sort Count History by date
