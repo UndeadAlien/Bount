@@ -26,7 +26,7 @@ struct AddItemView: View {
                         .keyboardType(.alphabet)
                     
                     Picker("Item Type", selection: $viewModel.itemType) {
-                        ForEach(ItemType.allCases, id: \.self) { type in
+                        ForEach(ItemType.allCases.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
                             Text(type.rawValue)
                                 .tag(type)
                         }
@@ -69,6 +69,7 @@ struct AddItemView: View {
                         presentationMode.wrappedValue.dismiss()
                         viewModel.reset()
                     }
+                    .foregroundColor(Color.red)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -85,6 +86,7 @@ struct AddItemView: View {
                             }
                         }
                     }
+                    .foregroundColor(Color.blue)
                 }
             }
         }

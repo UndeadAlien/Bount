@@ -11,7 +11,7 @@ class AddItemVM : ObservableObject {
     
     @Published var itemName = ""
     @Published var itemPrice: Int? = 0
-    @Published var itemType: ItemType = .VODKA
+    @Published var itemType: ItemType = .UNKNOWN
     @Published var itemVendor: Vendor?
     
     init() {}
