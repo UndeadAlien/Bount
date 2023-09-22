@@ -39,7 +39,7 @@ struct AddCountView: View {
                         let itemsForType = filteredItemsForType(itemType)
                         if !itemsForType.isEmpty {
                             Section(header: Text(itemType.rawValue)) {
-                                ForEach(itemsForType, id: \.self) { item in
+                                ForEach(itemsForType.sorted(by: { $0.name < $1.name }), id: \.self) { item in
                                     HStack {
                                         Text(item.name)
                                             .font(.headline)
@@ -55,12 +55,12 @@ struct AddCountView: View {
                                             ),
                                             in: 0...Int.max
                                         )
-                                        
                                     }
                                 }
                             }
                         }
                     }
+
                 }
                 .navigationTitle("Inventory Count")
                 .navigationBarBackButtonHidden(true)

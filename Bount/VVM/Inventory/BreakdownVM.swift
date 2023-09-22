@@ -5,7 +5,6 @@
 //  Created by Connor Hutchinson on 9/18/23.
 //
 
-import SwiftUI
 import Firebase
 import FirebaseFirestore
 

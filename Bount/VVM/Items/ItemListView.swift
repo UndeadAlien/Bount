@@ -37,7 +37,7 @@ struct ItemListView: View {
                     let itemsForType = filteredItemsForType(itemType)
                     if !itemsForType.isEmpty {
                         Section(header: Text(itemType.rawValue)) {
-                            ForEach(itemsForType, id: \.self) { item in
+                            ForEach(itemsForType.sorted(by: { $0.name < $1.name }), id: \.self) { item in
                                 NavigationLink(destination: ItemView(item: item)) {
                                     Text("\(item.name)")
                                 }
@@ -69,3 +69,4 @@ struct ItemListView_Previews: PreviewProvider {
         ItemListView()
     }
 }
+
