@@ -37,6 +37,13 @@ struct AddVendorView: View {
                     }
                 }
             }
+            .alert(isPresented: $viewModel.showingErrorAlert) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(viewModel.errorMessage),
+                    dismissButton: .cancel()
+                )
+            }
             .sheet(isPresented: $viewModel.isSelectingItems) {
                 ItemSelectionView(selectedItems: $viewModel.selectedItems, items: items)
             }
@@ -52,10 +59,13 @@ struct AddVendorView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.saveVendorToFirestore { success in
+                        viewModel.addVendorToFirestore { success, error in
                             if success {
                                 viewModel.reset()
                                 presentationMode.wrappedValue.dismiss()
+                            } else {
+                                viewModel.showingErrorAlert = true
+                                viewModel.errorMessage = error
                             }
                         }
                     }) {
