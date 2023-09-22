@@ -62,6 +62,14 @@ struct AddCountView: View {
                     }
 
                 }
+                .alert(isPresented: $viewModel.showingErrorAlert) {
+                    // Showing alert for an empty inventory count
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(viewModel.errorMessage),
+                        dismissButton: .cancel()
+                    )
+                }
                 .navigationTitle("Inventory Count")
                 .navigationBarBackButtonHidden(true)
                 .toolbar {
@@ -70,6 +78,7 @@ struct AddCountView: View {
                             viewModel.showingCancelConfirmationAlert = true
                         }
                         .alert(isPresented: $viewModel.showingCancelConfirmationAlert) {
+                            // Showing an alert to confirm a cancellation of a count
                             Alert(
                                 title: Text("Confirmation"),
                                 message: Text("Are you sure you want to cancel this item?"),
@@ -89,14 +98,18 @@ struct AddCountView: View {
                             Text("Submit")
                         }
                         .alert(isPresented: $viewModel.showingSubmitConfirmationAlert) {
+                            // Showing an alert to confirm a submission of a count
                             Alert(
                                 title: Text("Confirmation"),
                                 message: Text("Are you sure you want to submit the inventory count?"),
                                 primaryButton: .destructive(Text("Submit")) {
-                                    viewModel.uploadCountsToFirestore { success in
+                                    viewModel.uploadCountsToFirestore { success, error in
                                         if success {
                                             presentationMode.wrappedValue.dismiss()
                                             viewModel.reset()
+                                        } else {
+                                            viewModel.showingErrorAlert = true
+                                            viewModel.errorMessage = error
                                         }
                                     }
                                 },

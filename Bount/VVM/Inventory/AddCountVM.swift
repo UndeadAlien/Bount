@@ -14,35 +14,46 @@ class AddCountVM: ObservableObject {
     
     @Published var showingCancelConfirmationAlert = false
     @Published var showingSubmitConfirmationAlert = false
+    @Published var showingErrorAlert = false
+    @Published var errorMessage = ""
     
     init() {}
     
-    func uploadCountsToFirestore(completion: @escaping (Bool) -> Void) {
+    func uploadCountsToFirestore(completion: @escaping (Bool, String) -> Void) {
         let db = Firestore.firestore()
-        
-        let itemCountMappings: [[String: Any]] = itemCounts.map { (itemID, itemCount) in
+
+        // Filter out items with a count of zero
+        let itemCountMappings: [[String: Any]] = itemCounts.compactMap { (itemID, itemCount) in
+            guard itemCount > 0 else {
+                return nil // Skip items with a count of zero
+            }
             return [
                 "itemID": itemID,
                 "itemCount": itemCount
             ]
         }
 
+        // Check if there are any items to upload
+        guard !itemCountMappings.isEmpty else {
+            completion(false, "Cannot upload an empty count")
+            return
+        }
+
         let newInventoryCount: [String: Any] = [
             "date": Timestamp(date: Date()),
             "itemCountMappings": itemCountMappings
         ]
-        
+
         db.collection("count").addDocument(data: newInventoryCount) { error in
-            if let error = error {
-                print("Error adding weekly inventory count: \(error.localizedDescription)")
-                completion(false) // Call the completion handler with false on failure
+            if error != nil {
+                completion(false, "Error uploading the inventory count")
             } else {
-                print("Weekly inventory count added successfully.")
-                completion(true) // Call the completion handler with true on success
+                completion(true, "")
             }
         }
     }
-    
+
+
     func reset() {
         self.itemCounts = [:]
     }
