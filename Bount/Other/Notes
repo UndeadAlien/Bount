@@ -1,5 +1,15 @@
-When the app is opened for the first time ( since closing )
-    - Download:
-        - Item List
-        - Vendor List
+- When an
+    - Item
+    - Vendor
+    - Inventory Count
+- is submitted, check for key empty fields and return an error before uploading
+
+- Add ItemType to database and make it editable
+
+- Sort Count History by date
+
+- Make Count History editable?
+
+- Add count for different areas
+    - Screen to add locations/bars?
 

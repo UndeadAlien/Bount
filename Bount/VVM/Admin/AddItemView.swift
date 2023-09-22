@@ -19,13 +19,15 @@ struct AddItemView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("required")) {
-                    //*** the item name (required)
+                
+                Section(header: Text("Item Name")) {
                     TextField("Name", text: $viewModel.itemName)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.alphabet)
-                    
-                    Picker("Item Type", selection: $viewModel.itemType) {
+                }
+                
+                Section(header: Text("Item Type")) {
+                    Picker("Select Type", selection: $viewModel.itemType) {
                         ForEach(ItemType.allCases.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
                             Text(type.rawValue)
                                 .tag(type)
@@ -35,8 +37,8 @@ struct AddItemView: View {
                     .navigationBarTitle("Select Type", displayMode: .inline)
                 }
                 
-                Section(header: Text("not required")) {
-                    TextField("Price", text: Binding(
+                Section(header: Text("Item Price")) {
+                    TextField("", text: Binding(
                         get: {
                             // Convert the Int? to a String for the TextField's text
                             return viewModel.itemPrice.map { String($0) } ?? ""
@@ -47,9 +49,10 @@ struct AddItemView: View {
                         }
                     ))
                     .keyboardType(.decimalPad)
-                    
-                    // the items vendor (not required)
-                    Picker("Vendors", selection: $viewModel.itemVendor) {
+                }
+                
+                Section(header: Text("Item Vendors")) {
+                    Picker("Select Vendor", selection: $viewModel.itemVendor) {
                         Text("")
                             .tag(nil as Vendor?)
 
@@ -60,6 +63,13 @@ struct AddItemView: View {
                     }
                     .pickerStyle(.navigationLink)
                 }
+            }
+            .alert(isPresented: $viewModel.showingErrorAlert) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(viewModel.errorMessage),
+                    dismissButton: .cancel()
+                )
             }
             .navigationTitle("Add Item")
             .navigationBarBackButtonHidden(true)
@@ -79,10 +89,13 @@ struct AddItemView: View {
                             price: viewModel.itemPrice,
                             type: viewModel.itemType,
                             vendor: viewModel.itemVendor
-                        ) { success in
+                        ) { success, error in
                             if success {
                                 presentationMode.wrappedValue.dismiss()
                                 viewModel.reset()
+                            } else {
+                                viewModel.showingErrorAlert = true
+                                viewModel.errorMessage = error
                             }
                         }
                     }

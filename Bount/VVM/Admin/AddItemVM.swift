@@ -14,55 +14,75 @@ class AddItemVM : ObservableObject {
     @Published var itemType: ItemType = .UNKNOWN
     @Published var itemVendor: Vendor?
     
+    @Published var showingErrorAlert = false
+    @Published var errorMessage = ""
+    
     init() {}
     
-    func addItemToFirestore(name: String, price: Int?, type: ItemType, vendor: Vendor?, completion: @escaping (Bool) -> Void) {
-        var data: [String: Any] = [
-            "name": name,
-            "type": type.rawValue
-        ]
-
-        if let price = price {
-            data["price"] = price
+    func addItemToFirestore(name: String, price: Int?, type: ItemType, vendor: Vendor?, completion: @escaping (Bool, String) -> Void) {
+        // Check if the item name field is empty
+        if name.isEmpty {
+            completion(false, "Item name cannot be empty")
+            return
         }
-
-        let itemCollection = Firestore.firestore().collection("items")
         
-        var itemRef: DocumentReference?
-        
-        itemRef = itemCollection.addDocument(data: data) { error in
-            if let error = error {
-                print("Error adding item: \(error.localizedDescription)")
-                completion(false)
-            } else {
-                print("Item added successfully")
-                completion(true)
+        // Check if an item with the same name already exists
+        Firestore.firestore().collection("items").whereField("name", isEqualTo: name).getDocuments { (snapshot, error) in
+            if error != nil {
+                completion(false, "Error checking item name")
+                return
             }
-        }
-        
-        // itemRef now contains a reference to the added item document
-        if let itemID = itemRef?.documentID, let vendorID = vendor?.id {
-            // Update the vendor's inventory with the item ID
-            let vendorRef = Firestore.firestore().collection("vendors").document(vendorID)
-
-            vendorRef.updateData(["inventory": FieldValue.arrayUnion([itemID])]) { vendorError in
-                if let vendorError = vendorError {
-                    print("Error adding item to vendor's inventory: \(vendorError.localizedDescription)")
-                    completion(false)
+            
+            if let snapshot = snapshot, !snapshot.isEmpty {
+                // Item with the same name already exists
+                completion(false, "Item with the same already exists")
+                return
+            }
+            
+            // Item name is unique, proceed with adding the item
+            var data: [String: Any] = [
+                "name": name,
+                "type": type.rawValue
+            ]
+            
+            if let price = price {
+                data["price"] = price
+            }
+            
+            let itemCollection = Firestore.firestore().collection("items")
+            
+            var itemRef: DocumentReference?
+            
+            itemRef = itemCollection.addDocument(data: data) { error in
+                if error != nil {
+                    completion(false, "Error adding item")
                 } else {
-                    print("Item added to vendor's inventory successfully")
-                    completion(true)
+                    completion(true, "")
                 }
             }
-        } else {
-            print("Item or vendor is nil.")
-            completion(false)
+            
+            // itemRef now contains a reference to the added item document
+            if let itemID = itemRef?.documentID, let vendorID = vendor?.id {
+                // Update the vendor's inventory with the item ID
+                let vendorRef = Firestore.firestore().collection("vendors").document(vendorID)
+                
+                vendorRef.updateData(["inventory": FieldValue.arrayUnion([itemID])]) { vendorError in
+                    if vendorError != nil {
+                        completion(false, "Error adding item to vendor's inventory")
+                    } else {
+                        completion(true, "")
+                    }
+                }
+            } else {
+                completion(false, "")
+            }
         }
     }
     
     func reset() {
         self.itemName = ""
         self.itemPrice = 0
+        self.itemType = .UNKNOWN
     }
 
 }
