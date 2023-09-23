@@ -73,8 +73,6 @@ class AddItemVM : ObservableObject {
                         completion(true, "")
                     }
                 }
-            } else {
-                completion(false, "")
             }
         }
     }

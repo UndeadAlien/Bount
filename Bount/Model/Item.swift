@@ -22,11 +22,19 @@ enum ItemType : String, Codable, CaseIterable {
     case LIQUEUR
     case BEER
     case SELTZER
+    case WINE
+    case MIXER
     case KEG
     case FRUIT
     case SUPPLIES
     case FOOD
     case UNKNOWN
+}
+
+struct ItemTypes : Identifiable, Codable, Hashable {
+    @DocumentID var id: String?
+    
+    var type: String
 }
 
 struct Item : Identifiable, Codable, Equatable, Hashable {

@@ -103,7 +103,7 @@ struct ItemView: View {
             Section(header: Text("Item Type").font(.headline)) {
                 if viewModel.isEditing {
                     Picker("Type", selection: $viewModel.editedType) {
-                        ForEach(ItemType.allCases, id: \.self) { type in
+                        ForEach(ItemType.allCases.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
                             Text(type.rawValue)
                                 .tag(type)
                         }

@@ -50,6 +50,7 @@
 		B8B757B32A9A879200615BCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B757B22A9A879200615BCB /* Assets.xcassets */; };
 		B8B757B62A9A879200615BCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B757B52A9A879200615BCB /* Preview Assets.xcassets */; };
 		B8B757C42A9BD47F00615BCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B757C32A9BD47F00615BCB /* GoogleService-Info.plist */; };
+		B8EC5B062ABE638A004E0685 /* ItemTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC5B052ABE638A004E0685 /* ItemTypesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		B8B757B22A9A879200615BCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8B757B52A9A879200615BCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8B757C32A9BD47F00615BCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B8EC5B052ABE638A004E0685 /* ItemTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				B825FFDB2ABAB7FC00EA8985 /* ItemListView.swift */,
 				B825FFDD2ABAB84A00EA8985 /* ItemListVM.swift */,
 				B825FFE12ABB7DFC00EA8985 /* ItemSelectionView.swift */,
+				B8EC5B052ABE638A004E0685 /* ItemTypesView.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				B825FFD02AB8C34500EA8985 /* BreakdownVM.swift in Sources */,
 				B825FFE62ABC009900EA8985 /* CSVtoFirebaseView.swift in Sources */,
 				B89823C62A9BD97C00D91663 /* Vendor.swift in Sources */,
+				B8EC5B062ABE638A004E0685 /* ItemTypesView.swift in Sources */,
 				B89823D22A9BEB1200D91663 /* RegistrationVM.swift in Sources */,
 				B825FFED2ABC1CB800EA8985 /* SearchBarView.swift in Sources */,
 				B8B757B12A9A879100615BCB /* TabBarView.swift in Sources */,

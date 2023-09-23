@@ -85,7 +85,7 @@ struct CountHistoryRowView: View {
         if let date = inventoryCount.date?.dateValue() {
             VStack {
                 NavigationLink(destination: BreakdownView(date: Timestamp(date: date), items: inventoryCount.itemCountMappings)) {
-                    Text("📅  \(viewModel.formatDate(date: date))")
+                    Text("🗓️  \(viewModel.formatDate(date: date))")
                         .font(.headline)
                         .foregroundColor(.black)
                 }

@@ -29,7 +29,7 @@ extension Encodable {
             "type": item.type.rawValue
         ]
 
-        if let price = item.price {
+        if item.price != nil {
             dictionary["price"] = item.price
         }
 

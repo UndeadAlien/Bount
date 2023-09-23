@@ -29,7 +29,7 @@ class AddVendorVM : ObservableObject {
         Firestore.firestore().collection("vendors")
             .whereField("name", isEqualTo: vendorName)
             .getDocuments { (snapshot, error) in
-                if let error = error {
+                if error != nil {
                     completion(false, "Error checking vendor name")
                     return
                 }
@@ -51,7 +51,7 @@ class AddVendorVM : ObservableObject {
 
                 // Add the vendor data to Firestore
                 Firestore.firestore().collection("vendors").addDocument(data: vendorData) { error in
-                    if let error = error {
+                    if error != nil {
                         completion(false, "Error adding vendor")
                     } else {
                         completion(true, "")
