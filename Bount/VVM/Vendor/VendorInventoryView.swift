@@ -102,10 +102,8 @@ struct VendorInventoryView: View {
                     }
                 }) {
                     Text(viewModel.isEditing ? "Save" : "Edit")
-                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8) // Add rounded corners
+                        .foregroundColor(.blue)
+                        .cornerRadius(8)
                 }
             }
 
@@ -117,7 +115,7 @@ struct VendorInventoryView: View {
                         viewModel.isEditing.toggle()
                         viewModel.selectedItems = Set<Item>()
                     }
-                    .foregroundColor(.blue)
+                    .foregroundColor(.red)
                 }
             }
         }

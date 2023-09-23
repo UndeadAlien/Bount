@@ -77,6 +77,7 @@ struct AddCountView: View {
                         Button("Cancel") {
                             viewModel.showingCancelConfirmationAlert = true
                         }
+                        .foregroundColor(Color.red)
                         .alert(isPresented: $viewModel.showingCancelConfirmationAlert) {
                             // Showing an alert to confirm a cancellation of a count
                             Alert(
@@ -97,6 +98,7 @@ struct AddCountView: View {
                         }) {
                             Text("Submit")
                         }
+                        .foregroundColor(Color.blue)
                         .alert(isPresented: $viewModel.showingSubmitConfirmationAlert) {
                             // Showing an alert to confirm a submission of a count
                             Alert(

@@ -55,6 +55,7 @@ struct AddVendorView: View {
                         presentationMode.wrappedValue.dismiss()
                         viewModel.reset()
                     }
+                    .foregroundColor(Color.red)
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -71,6 +72,7 @@ struct AddVendorView: View {
                     }) {
                         Text("Submit")
                     }
+                    .foregroundColor(Color.blue)
                 }
             }
         }

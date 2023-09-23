@@ -144,10 +144,8 @@ struct ItemView: View {
                     }
                 }) {
                     Text(viewModel.isEditing ? "Save" : "Edit")
-                        .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8) // Add rounded corners
+                        .foregroundColor(.blue)
+                        .cornerRadius(8)
                 }
             }
 
@@ -158,7 +156,7 @@ struct ItemView: View {
                         // Exit edit mode without saving changes
                         viewModel.isEditing.toggle()
                     }
-                    .foregroundColor(.blue)
+                    .foregroundColor(.red)
                 }
             }
         }

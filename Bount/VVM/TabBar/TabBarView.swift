@@ -30,10 +30,6 @@ struct TabBarView: View {
                 .tabItem {
                     Label("Items", systemImage: "bag.fill")
                 }
-            ProfileView() // Profile View
-                .tabItem {
-                    Label("Profile", systemImage: "person.circle")
-                }
         }
     }
 }
