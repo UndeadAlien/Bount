@@ -47,6 +47,7 @@ struct ItemListView: View {
                 }
             }
             .navigationTitle("Items")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AddItemView()) {

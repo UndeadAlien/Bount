@@ -14,6 +14,8 @@ struct VendorView: View {
     
     @FirestoreQuery(collectionPath: "vendors") private var vendors: [Vendor]
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         
         NavigationStack {
@@ -23,22 +25,19 @@ struct VendorView: View {
                         NavigationLink(destination: VendorInventoryView(vendor: vendor)) {
                             Text(vendor.name)
                                 .font(.headline)
-                                .foregroundColor(.blue)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     }
-                    .padding(12)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(white: 0.95))
-                    )
-                    .shadow(radius: 5)
                 }
             }
             .navigationTitle("Vendors")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: AddVendorView()) {
                         Label("", systemImage: "plus")
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                     }
                 }
             }

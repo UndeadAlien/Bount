@@ -18,21 +18,35 @@ struct BreakdownView: View {
 
     var body: some View {
         NavigationStack {
+            
+            SearchBarView(text: $viewModel.searchText)
+            
             List {
                 ForEach(ItemType.allCases, id: \.rawValue) { itemType in
-                    Section(header: Text(itemType.rawValue)) {
-                        ForEach(filteredItems(for: itemType), id: \.self) { item in
-                            HStack {
-                                if let itemName = viewModel.dbItems.first(where: { $0.id == item.itemID })?.name {
-                                    Text("\(itemName)")
+                    let filteredItemsForType = filteredItems(for: itemType)
+                    
+                    if !filteredItemsForType.isEmpty {
+                        Section(header: Text(itemType.rawValue)) {
+                            ForEach(filteredItemsForType.sorted(by: { (item1, item2) in
+                                if let name1 = viewModel.dbItems.first(where: { $0.id == item1.itemID })?.name,
+                                   let name2 = viewModel.dbItems.first(where: { $0.id == item2.itemID })?.name {
+                                    return name1 < name2
                                 }
+                                return false
+                            }), id: \.self) { item in
+                                HStack {
+                                    if let itemName = viewModel.dbItems.first(where: { $0.id == item.itemID })?.name {
+                                        Text("\(itemName)")
+                                    }
 
-                                Spacer()
+                                    Spacer()
 
-                                Text("\(item.itemCount)")
-                                    .font(.title2)
-                                    .foregroundColor(.primary)
+                                    Text("\(item.itemCount)")
+                                        .font(.title2)
+                                        .foregroundColor(.primary)
+                                }
                             }
+
                         }
                     }
                 }
@@ -43,13 +57,27 @@ struct BreakdownView: View {
         }
     }
 
+    func removePunctuation(from text: String) -> String {
+        let punctuationSet = CharacterSet.punctuationCharacters
+        let filteredText = text.components(separatedBy: punctuationSet).joined(separator: "")
+        return filteredText
+    }
+
     func filteredItems(for itemType: ItemType) -> [InventoryCountMapping] {
-        // Filter the items based on the ItemType
+        let searchTextWithoutPunctuation = removePunctuation(from: viewModel.searchText.lowercased())
+        
         return items.filter { item in
             if let itemObj = viewModel.dbItems.first(where: { $0.id == item.itemID }) {
-                return itemObj.type.rawValue == itemType.rawValue
+                let itemNameWithoutPunctuation = removePunctuation(from: itemObj.name.lowercased())
+                
+                let itemNameMatches = itemNameWithoutPunctuation.contains(searchTextWithoutPunctuation)
+                let itemTypeMatches = itemObj.type == itemType
+                
+                return viewModel.searchText.isEmpty ? itemTypeMatches : (itemNameMatches && itemTypeMatches)
             }
             return false
         }
     }
+
+    
 }

@@ -71,7 +71,7 @@ class CountHistoryVM : ObservableObject {
     // Define a function to format the date
     func formatDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy HH:mm:ss"
+        dateFormatter.dateFormat = "MMM d, yyyy – HH:mm"
         return dateFormatter.string(from: date)
     }
     

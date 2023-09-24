@@ -51,6 +51,8 @@
 		B8B757B62A9A879200615BCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8B757B52A9A879200615BCB /* Preview Assets.xcassets */; };
 		B8B757C42A9BD47F00615BCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8B757C32A9BD47F00615BCB /* GoogleService-Info.plist */; };
 		B8EC5B062ABE638A004E0685 /* ItemTypesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC5B052ABE638A004E0685 /* ItemTypesView.swift */; };
+		B8EC5B082ABF9171004E0685 /* NewAddCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC5B072ABF9171004E0685 /* NewAddCountView.swift */; };
+		B8EC5B0A2ABF9210004E0685 /* AddCountItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EC5B092ABF9210004E0685 /* AddCountItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		B8B757B52A9A879200615BCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B8B757C32A9BD47F00615BCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8EC5B052ABE638A004E0685 /* ItemTypesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTypesView.swift; sourceTree = "<group>"; };
+		B8EC5B072ABF9171004E0685 /* NewAddCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddCountView.swift; sourceTree = "<group>"; };
+		B8EC5B092ABF9210004E0685 /* AddCountItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCountItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				B825FFCF2AB8C34500EA8985 /* BreakdownVM.swift */,
 				B8168D7D2AB7A0DA00E8AD46 /* AddCountView.swift */,
 				B825FFCD2AB8C0E300EA8985 /* AddCountVM.swift */,
+				B8EC5B072ABF9171004E0685 /* NewAddCountView.swift */,
+				B8EC5B092ABF9210004E0685 /* AddCountItemView.swift */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -365,10 +371,12 @@
 				B8EC5B062ABE638A004E0685 /* ItemTypesView.swift in Sources */,
 				B89823D22A9BEB1200D91663 /* RegistrationVM.swift in Sources */,
 				B825FFED2ABC1CB800EA8985 /* SearchBarView.swift in Sources */,
+				B8EC5B082ABF9171004E0685 /* NewAddCountView.swift in Sources */,
 				B8B757B12A9A879100615BCB /* TabBarView.swift in Sources */,
 				B8AE6CE02AB28420005A7D30 /* ItemView.swift in Sources */,
 				B8168D832AB8131600E8AD46 /* BreakdownView.swift in Sources */,
 				B825FFDE2ABAB84A00EA8985 /* ItemListVM.swift in Sources */,
+				B8EC5B0A2ABF9210004E0685 /* AddCountItemView.swift in Sources */,
 				B825FFD42AB8DA9000EA8985 /* AddVendorView.swift in Sources */,
 				B848E7EE2AA258F700D0FFBD /* TabBarVM.swift in Sources */,
 				B825FFD82AB9D38A00EA8985 /* AddVendorVM.swift in Sources */,

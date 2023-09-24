@@ -14,6 +14,8 @@ class BreakdownVM : ObservableObject {
     @Published var items: [Item] = []
     @Published var dbItems: [Item] = []
     
+    @Published var searchText = ""
+    
     let db = Firestore.firestore()
     
     init() {}

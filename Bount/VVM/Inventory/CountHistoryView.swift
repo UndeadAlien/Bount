@@ -22,6 +22,8 @@ extension Timestamp: Comparable {
 
 struct CountHistoryView: View {
     @StateObject var viewModel = CountHistoryVM()
+    
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationStack {
@@ -30,10 +32,12 @@ struct CountHistoryView: View {
                     viewModel.fetchCountHistory()
                 }
                 .navigationTitle("Count History")
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink(destination: AddCountView()) {
                             Label("", systemImage: "plus")
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
                         }
                     }
                 }
@@ -85,16 +89,22 @@ struct CountHistoryRowView: View {
         if let date = inventoryCount.date?.dateValue() {
             VStack {
                 NavigationLink(destination: BreakdownView(date: Timestamp(date: date), items: inventoryCount.itemCountMappings)) {
-                    Text("🗓️  \(viewModel.formatDate(date: date))")
-                        .font(.headline)
-                        .foregroundColor(.black)
+                    HStack {
+                        Text("🗓️")
+                        Text("\(viewModel.formatDate(date: date))")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                    }
                 }
                 .padding(12)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(white: 0.95))
+                        .fill(Color(white: 0.75))
                 )
                 .shadow(radius: 5)
+                .foregroundColor(.black)
             }
         }
     }
