@@ -58,7 +58,7 @@ struct ContentView: View {
             let itemName = item["name"] as! String
             let itemPrice = item["price"] as! Int
             
-            let newItem = Item(name: itemName, price: itemPrice, type: ItemType.UNKNOWN)
+            let newItem = Item(name: itemName, price: itemPrice, type: ItemType.UNKNOWN, isActive: false)
             print(newItem)
             
             let newItemRef = db.collection("items").document()

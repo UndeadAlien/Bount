@@ -10,7 +10,7 @@ struct BountApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabBarView()
+            RootView()
         }
     }
 }

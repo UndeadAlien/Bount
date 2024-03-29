@@ -44,4 +44,5 @@ struct Item : Identifiable, Codable, Equatable, Hashable {
     var price: Int?
     var type: ItemType
     var vendor: Vendor?
+    var isActive: Bool
 }
