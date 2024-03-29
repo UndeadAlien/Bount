@@ -97,5 +97,5 @@ iOSInjectionProject/
 # End of https://www.toptal.com/developers/gitignore/api/firebase,swift
 
 
-.DS_STORE
-.vscode
+.DS_Store
+*.vscode
