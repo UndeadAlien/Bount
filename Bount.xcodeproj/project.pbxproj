@@ -59,7 +59,6 @@
 		B89823D42A9BEEF900D91663 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89823D32A9BEEF900D91663 /* Extensions.swift */; };
 		B8AE6CD92AB23E84005A7D30 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE6CD82AB23E84005A7D30 /* AddItemView.swift */; };
 		B8AE6CDB2AB23E8E005A7D30 /* AddItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE6CDA2AB23E8E005A7D30 /* AddItemVM.swift */; };
-		B8AE6CDD2AB2403B005A7D30 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = B8AE6CDC2AB2403B005A7D30 /* Notes */; };
 		B8AE6CE02AB28420005A7D30 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE6CDF2AB28420005A7D30 /* ItemView.swift */; };
 		B8AE6CE22AB28429005A7D30 /* ItemVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE6CE12AB28429005A7D30 /* ItemVM.swift */; };
 		B8B757AF2A9A879100615BCB /* BountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B757AE2A9A879100615BCB /* BountApp.swift */; };
@@ -120,7 +119,6 @@
 		B89823D32A9BEEF900D91663 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B8AE6CD82AB23E84005A7D30 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		B8AE6CDA2AB23E8E005A7D30 /* AddItemVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemVM.swift; sourceTree = "<group>"; };
-		B8AE6CDC2AB2403B005A7D30 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		B8AE6CDF2AB28420005A7D30 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		B8AE6CE12AB28429005A7D30 /* ItemVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVM.swift; sourceTree = "<group>"; };
 		B8B757AB2A9A879100615BCB /* Bount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bount.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,7 +337,6 @@
 				B8B757B22A9A879200615BCB /* Assets.xcassets */,
 				B8B757AE2A9A879100615BCB /* BountApp.swift */,
 				B89823D32A9BEEF900D91663 /* Extensions.swift */,
-				B8AE6CDC2AB2403B005A7D30 /* Notes */,
 				B825FFE52ABC009900EA8985 /* CSVtoFirebaseView.swift */,
 			);
 			path = Other;
@@ -418,7 +415,6 @@
 				B868F02D2B9CED47000B54E7 /* GoogleService-Info.plist in Resources */,
 				B8B757B62A9A879200615BCB /* Preview Assets.xcassets in Resources */,
 				B8B757B32A9A879200615BCB /* Assets.xcassets in Resources */,
-				B8AE6CDD2AB2403B005A7D30 /* Notes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
