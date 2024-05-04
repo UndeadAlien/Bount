@@ -13,5 +13,5 @@
 
 <details>
   <summary><b>Item Counter</b></summary>
-  <img src="https://imgur.com/nB4paKa" width="250" /> <img src="https://imgur.com/A2UBH5X" width="250" />
+  <img src="https://imgur.com/nB4paKa.png" width="250" /> <img src="https://imgur.com/A2UBH5X.png" width="250" />
 </details>
