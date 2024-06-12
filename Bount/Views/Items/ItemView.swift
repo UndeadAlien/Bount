@@ -23,147 +23,182 @@ struct ItemView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                InlineHeaderView(title: item.name) {
-                    itemForm()
-                }
-                
                 if viewModel.isEditing {
+                    InlineHeaderView(title: item.name) {
+                        editMode()
+                            .transition(.slide)
+                    }
+                    
                     deleteButton()
+                } else {
+                    InlineHeaderView(title: item.name) {
+                        itemForm()
+                            .transition(.slide)
+                    }
                 }
             }
+            .animation(.easeInOut, value: viewModel.isEditing)
         }
     }
     
     @ViewBuilder
     func itemForm() -> some View {
         Form {
-            if !viewModel.isEditing {
-                Section(header: 
-                            Text("Item ID")
-                                .foregroundStyle(Color.purple)
-                                .modifier(FontMod(size: 14, isBold: true))
-                ) {
-                    Text(item.id ?? "")
-                        .modifier(FontMod(size: 14, isBold: true))
+            Section(header:
+                        Text("Item Name")
+                .foregroundStyle(Color.purple)
+                .modifier(FontMod(size: 14, isBold: true))
+            ) {
+                Text(item.name)
+                    .modifier(FontMod(size: 14, isBold: true))
+            }
+            
+            Section(header:
+                        Text("Item Price")
+                .foregroundStyle(Color.purple)
+                .modifier(FontMod(size: 14, isBold: true))
+            ) {
+                Text("$ \(item.price ?? 0)")
+                    .modifier(FontMod(size: 14, isBold: true))
+            }
+            
+            Section(header:
+                        Text("Item Type")
+                .foregroundStyle(Color.purple)
+                .modifier(FontMod(size: 14, isBold: true))
+            ) {
+                Text(item.type.rawValue)
+                    .modifier(FontMod(size: 14, isBold: true))
+            }
+            
+            Section(header:
+                        Text("Active Item")
+                .foregroundStyle(Color.purple)
+                .modifier(FontMod(size: 14, isBold: true))
+            ) {
+                Text(item.isActive ? "✅" : "❌")
+            }
+        }
+        .toolbar {
+            // Add custom toolbar buttons
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    // Enter edit mode
+                    viewModel.isEditing.toggle()
+                    // Initialize edited fields with the current values
+                    viewModel.editedName = item.name
+                    viewModel.editedPrice = item.price ?? 0
+                    viewModel.editedType = item.type
+                    viewModel.editedActivity = item.isActive
+                }) {
+                    Text(viewModel.isEditing ? "Save" : "Edit")
+                        .foregroundColor(Color("Green1"))
+                        .cornerRadius(8)
+                        .modifier(FontMod(size: 18, isBold: true))
                 }
             }
             
-            Section(header: 
+            // Add custom toolbar buttons
+            ToolbarItem(placement: .bottomBar) {
+                Text(item.id ?? "")
+                    .modifier(FontMod(size: 14, isBold: true))
+            }
+        }
+        
+    }
+    
+    @ViewBuilder
+    func editMode() -> some View {
+        Form {
+            // item name
+            Section(header:
                         Text("Item Name")
                             .foregroundStyle(Color.purple)
                             .modifier(FontMod(size: 14, isBold: true))
             ) {
-                if viewModel.isEditing {
-                    TextField("Name", text: Binding(
-                        get: { viewModel.editedName },
-                        set: { newValue in
-                            viewModel.editedName = newValue
-                        }
-                    ))
-                    .keyboardType(.alphabet)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .modifier(FontMod(size: 14, isBold: false))
-                } else {
-                    Text(item.name)
-                        .modifier(FontMod(size: 14, isBold: true))
-                }
+                TextField("Name", text: Binding(
+                    get: { viewModel.editedName },
+                    set: { newValue in
+                        viewModel.editedName = newValue
+                    }
+                ))
+                .keyboardType(.alphabet)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .modifier(FontMod(size: 14, isBold: false))
             }
-
-            Section(header: 
+            // item price
+            Section(header:
                         Text("Item Price")
                             .foregroundStyle(Color.purple)
                             .modifier(FontMod(size: 14, isBold: true))
             ) {
-                if viewModel.isEditing {
-                    TextField("Price", text: Binding(
-                        get: { String(viewModel.editedPrice) },
-                        set: {
-                            if let newValue = Int($0) {
-                                viewModel.editedPrice = newValue
-                            }
+                TextField("Price", text: Binding(
+                    get: { String(viewModel.editedPrice) },
+                    set: {
+                        if let newValue = Int($0) {
+                            viewModel.editedPrice = newValue
                         }
-                    ))
-                    .keyboardType(.decimalPad)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .modifier(FontMod(size: 14, isBold: false))
-                } else {
-                    Text("$ \(item.price ?? 0)")
-                        .modifier(FontMod(size: 14, isBold: true))
-                }
+                    }
+                ))
+                .keyboardType(.decimalPad)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .modifier(FontMod(size: 14, isBold: false))
             }
 
-            Section(header: 
+            // item type
+            Section(header:
                         Text("Item Type")
                             .foregroundStyle(Color.purple)
                             .modifier(FontMod(size: 14, isBold: true))
             ) {
-                if viewModel.isEditing {
-                    Picker("Type", selection: $viewModel.editedType) {
-                        ForEach(ItemType.allCases.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
-                            Text(type.rawValue)
-                                .tag(type)
-                        }
+                Picker("Type", selection: $viewModel.editedType) {
+                    ForEach(ItemType.allCases.sorted(by: { $0.rawValue < $1.rawValue }), id: \.self) { type in
+                        Text(type.rawValue)
+                            .tag(type)
                     }
-                    .pickerStyle(.navigationLink)
-                    .modifier(FontMod(size: 14, isBold: false))
-                } else {
-                    Text(item.type.rawValue)
-                        .modifier(FontMod(size: 14, isBold: true))
                 }
+                .pickerStyle(.navigationLink)
+                .modifier(FontMod(size: 14, isBold: false))
             }
          
-            Section(header: 
+            // active item
+            Section(header:
                         Text("Active Item")
                             .foregroundStyle(Color.purple)
                             .modifier(FontMod(size: 14, isBold: true))
             ) {
-                if viewModel.isEditing {
-                    Toggle(
-                        isOn: Binding(
-                            get: { viewModel.editedActivity },
-                            set: { newValue in
-                                viewModel.editedActivity = newValue
-                            }
-                        ),
-                        label: {
-                            Text("Is Active?")
-                                .modifier(FontMod(size: 14, isBold: false))
+                Toggle(
+                    isOn: Binding(
+                        get: { viewModel.editedActivity },
+                        set: { newValue in
+                            viewModel.editedActivity = newValue
                         }
-                    )
-                    .toggleStyle(SwitchToggleStyle(tint: Color("secondaryColor")))
-                } else {
-                    Text(item.isActive ? "✅" : "❌")
-                }
+                    ),
+                    label: {
+                        Text("Is Active?")
+                            .modifier(FontMod(size: 14, isBold: false))
+                    }
+                )
+                .toggleStyle(SwitchToggleStyle(tint: Color("secondaryColor")))
             }
-
         }
         .navigationBarBackButtonHidden(viewModel.isEditing)
         .toolbar {
             // Add custom toolbar buttons
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    if viewModel.isEditing {
-                        // Save changes to Firestore and exit edit mode
-                        viewModel.saveChanges(
-                            item: &item,
-                            editedName: viewModel.editedName,
-                            editedPrice: viewModel.editedPrice,
-                            editedType: viewModel.editedType,
-                            editedActivity: viewModel.editedActivity
-                        ) { success in
-                                if success {
-                                    viewModel.isEditing.toggle()
-                                }
+                    // Save changes to Firestore and exit edit mode
+                    viewModel.saveChanges(
+                        item: &item,
+                        editedName: viewModel.editedName,
+                        editedPrice: viewModel.editedPrice,
+                        editedType: viewModel.editedType,
+                        editedActivity: viewModel.editedActivity
+                    ) { success in
+                            if success {
+                                viewModel.isEditing.toggle()
                             }
-                    } else {
-                        // Enter edit mode
-                        viewModel.isEditing.toggle()
-                        // Initialize edited fields with the current values
-                        viewModel.editedName = item.name
-                        viewModel.editedPrice = item.price ?? 0
-                        viewModel.editedType = item.type
-                        viewModel.editedActivity = item.isActive
-                    }
+                        }
                 }) {
                     Text(viewModel.isEditing ? "Save" : "Edit")
                         .foregroundColor(Color("Green1"))
@@ -173,14 +208,12 @@ struct ItemView: View {
             }
 
             ToolbarItem(placement: .navigationBarLeading) {
-                if viewModel.isEditing {
-                    Button {
-                        viewModel.isEditing.toggle()
-                    } label: {
-                        Text("Cancel")
-                            .foregroundStyle(.red)
-                            .modifier(FontMod(size: 18, isBold: true))
-                    }
+                Button {
+                    viewModel.isEditing.toggle()
+                } label: {
+                    Text("Cancel")
+                        .foregroundStyle(.red)
+                        .modifier(FontMod(size: 18, isBold: true))
                 }
             }
         }

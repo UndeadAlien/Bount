@@ -44,7 +44,7 @@ struct BreakdownView: View {
     func inventoryCountList() -> some View {
         List {
             ForEach(filterByVendor, id: \.self) { vendor in
-                Section(header: 
+                Section(header:
                             Text(vendor.name)
                                 .foregroundStyle(Color.purple)
                                 .modifier(FontMod(size: 18, isBold: true))
@@ -55,6 +55,20 @@ struct BreakdownView: View {
                                 .badge(item.itemCount)
                                 .modifier(FontMod(size: 14, isBold: false))
                         }
+                    }
+                }
+            }
+
+            Section(header:
+                        Text("Items with No Vendor")
+                            .foregroundStyle(Color.purple)
+                            .modifier(FontMod(size: 18, isBold: true))
+            ) {
+                ForEach(viewModel.sortItems(mapping: itemsWithNoVendor()), id: \.self) { item in
+                    if let itemName = viewModel.dbItems.first(where: { $0.id == item.itemID })?.name {
+                        Text("\(itemName)")
+                            .badge(item.itemCount)
+                            .modifier(FontMod(size: 14, isBold: false))
                     }
                 }
             }
@@ -69,5 +83,12 @@ struct BreakdownView: View {
         return filteredItems
     }
 
-}
+    func itemsWithNoVendor() -> [InventoryCountMapping] {
+        let vendorItemIDs = vendors.flatMap { $0.inventory }
+        let itemsWithNoVendor = items.filter { item in
+            return !vendorItemIDs.contains(item.itemID)
+        }
 
+        return itemsWithNoVendor
+    }
+}
