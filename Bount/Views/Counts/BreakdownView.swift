@@ -44,33 +44,25 @@ struct BreakdownView: View {
     func inventoryCountList() -> some View {
         List {
             ForEach(filterByVendor, id: \.self) { vendor in
-                Section(header:
-                            Text(vendor.name)
-                                .foregroundStyle(Color.purple)
-                                .modifier(FontMod(size: 18, isBold: true))
+                NavigationLink(destination: VendorCountView(
+                    vendor: vendor,
+                    filteredItems: filteredItems(for: vendor),
+                    viewModel: viewModel)
                 ) {
-                    ForEach(viewModel.sortItems(mapping: filteredItems(for: vendor)), id: \.self) { item in
-                        if let itemName = viewModel.dbItems.first(where: { $0.id == item.itemID })?.name {
-                            Text("\(itemName)")
-                                .badge(item.itemCount)
-                                .modifier(FontMod(size: 14, isBold: false))
-                        }
-                    }
+                    Text(vendor.name)
+                        .foregroundStyle(Color.purple)
+                        .modifier(FontMod(size: 18, isBold: true))
                 }
             }
-
-            Section(header:
-                        Text("Items with No Vendor")
-                            .foregroundStyle(Color.purple)
-                            .modifier(FontMod(size: 18, isBold: true))
+            
+            NavigationLink(destination: VendorCountView(
+                vendor: nil,
+                filteredItems: itemsWithNoVendor(),
+                viewModel: viewModel)
             ) {
-                ForEach(viewModel.sortItems(mapping: itemsWithNoVendor()), id: \.self) { item in
-                    if let itemName = viewModel.dbItems.first(where: { $0.id == item.itemID })?.name {
-                        Text("\(itemName)")
-                            .badge(item.itemCount)
-                            .modifier(FontMod(size: 14, isBold: false))
-                    }
-                }
+                Text("No Vendor")
+                    .foregroundStyle(Color.red)
+                    .modifier(FontMod(size: 18, isBold: true))
             }
         }
     }
@@ -92,3 +84,28 @@ struct BreakdownView: View {
         return itemsWithNoVendor
     }
 }
+
+struct VendorCountView: View {
+    let vendor: Vendor?
+    let filteredItems: [InventoryCountMapping]
+    @ObservedObject var viewModel: BreakdownVM
+
+    var body: some View {
+        List {
+            Section(header:
+                        Text(vendor?.name ?? "No Vendor")
+                            .foregroundStyle(vendor?.name != nil ? Color.purple: Color.red)
+                            .modifier(FontMod(size: 18, isBold: true))
+            ) {
+                ForEach(viewModel.sortItems(mapping: filteredItems), id: \.self) { item in
+                    if let itemName = viewModel.dbItems.first(where: { $0.id == item.itemID })?.name {
+                        Text("\(itemName)")
+                            .badge(item.itemCount)
+                            .modifier(FontMod(size: 14, isBold: false))
+                    }
+                }
+            }
+        }
+    }
+}
+

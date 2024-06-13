@@ -33,6 +33,7 @@
 		B848E7FA2AA6761E00D0FFBD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7F92AA6761E00D0FFBD /* Item.swift */; };
 		B848E7FC2AA6783900D0FFBD /* VendorVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E7FB2AA6783900D0FFBD /* VendorVM.swift */; };
 		B848E8102AABBEE700D0FFBD /* CountHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848E80F2AABBEE700D0FFBD /* CountHistoryView.swift */; };
+		B84DE2FE2C1A351D00AA03FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B84DE2FD2C1A351D00AA03FE /* GoogleService-Info.plist */; };
 		B868F0242B9A97F6000B54E7 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B868F0232B9A97F6000B54E7 /* RootView.swift */; };
 		B868F0262B9AF293000B54E7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B868F0252B9AF293000B54E7 /* HomeView.swift */; };
 		B868F0292B9B9563000B54E7 /* AddLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B868F0282B9B9563000B54E7 /* AddLocationView.swift */; };
@@ -95,6 +96,7 @@
 		B848E7F92AA6761E00D0FFBD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B848E7FB2AA6783900D0FFBD /* VendorVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorVM.swift; sourceTree = "<group>"; };
 		B848E80F2AABBEE700D0FFBD /* CountHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountHistoryView.swift; sourceTree = "<group>"; };
+		B84DE2FD2C1A351D00AA03FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B868F0232B9A97F6000B54E7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		B868F0252B9AF293000B54E7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B868F0282B9B9563000B54E7 /* AddLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationView.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		B8B757C02A9A8C1F00615BCB /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				B84DE2FD2C1A351D00AA03FE /* GoogleService-Info.plist */,
 				B8B757B22A9A879200615BCB /* Assets.xcassets */,
 				B8B757AE2A9A879100615BCB /* BountApp.swift */,
 				B89823D32A9BEEF900D91663 /* Extensions.swift */,
@@ -409,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B825FFDA2AB9F9DC00EA8985 /* .gitignore in Resources */,
+				B84DE2FE2C1A351D00AA03FE /* GoogleService-Info.plist in Resources */,
 				B8B757B62A9A879200615BCB /* Preview Assets.xcassets in Resources */,
 				B8B757B32A9A879200615BCB /* Assets.xcassets in Resources */,
 			);
