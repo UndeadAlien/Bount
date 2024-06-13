@@ -31,9 +31,38 @@ class BreakdownVM : ObservableObject {
                   let item2Name = self.dbItems.first(where: { $0.id == item2.itemID })?.name else {
                 return false
             }
-            return item1Name < item2Name
+
+            let item1NumericValue = extractLeadingNumericValue(from: item1Name)
+            let item2NumericValue = extractLeadingNumericValue(from: item2Name)
+
+            switch (item1NumericValue, item2NumericValue) {
+            case let (num1?, num2?):
+                // Both names start with numeric values
+                if num1 == num2 {
+                    return item1Name < item2Name
+                }
+                return num1 < num2
+            case (nil, nil):
+                // Neither name starts with a numeric value
+                return item1Name < item2Name
+            case (nil, _?):
+                // Only item2 starts with a numeric value
+                return false
+            case (_?, nil):
+                // Only item1 starts with a numeric value
+                return true
+            }
         }
         return sortedItems
+    }
+
+    func extractLeadingNumericValue(from name: String) -> Int? {
+        let scanner = Scanner(string: name)
+        var numericValue: Int = 0
+        if scanner.scanInt(&numericValue) {
+            return numericValue
+        }
+        return nil
     }
     
     // Define a function to format the date
