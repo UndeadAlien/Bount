@@ -76,7 +76,10 @@ struct ItemView: View {
                 .foregroundStyle(Color.purple)
                 .modifier(FontMod(size: 14, isBold: true))
             ) {
-                Text(item.isActive ? "✅" : "❌")
+                Text(item.isActive ? "Yes" : "No")
+                    .modifier(FontMod(size: 14, isBold: true))
+                    .foregroundStyle(item.isActive ? Color("Green1") : .red)
+                    
             }
         }
         .toolbar {
@@ -252,7 +255,7 @@ struct ItemView: View {
 
 #Preview {
     // Create a placeholder item for preview
-    let tempItem = Item(id: "123", name: "Sample Item", price: 20, type: .VODKA, isActive: true)
+    let tempItem = Item(id: "123", name: "Sample Item", price: 20, type: .VODKA, vendor: Vendor(name: "Testing", inventory: []), isActive: true)
     
     // Pass the placeholder item to ItemView
     return ItemView(item: tempItem)

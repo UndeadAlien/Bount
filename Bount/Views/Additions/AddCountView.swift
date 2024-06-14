@@ -16,6 +16,8 @@ struct AddCountView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @State private var showingAddItemView = false
+    
     var filteredItems: [Item] {
         let searchText = viewModel.searchText.lowercased()
         if searchText.isEmpty {
@@ -31,7 +33,7 @@ struct AddCountView: View {
 
     var body: some View {
         NavigationStack {
-            InlineHeaderView(title: "Inventory Count") {
+            InlineHeaderView(title: "") {
                 countForm()
             }
         }
@@ -92,7 +94,7 @@ struct AddCountView: View {
                     Text("Cancel")
                         .modifier(FontMod(size: 18, isBold: true))
                 }
-                .foregroundColor(Color.red)
+                .foregroundStyle(Color.red)
                 .alert(isPresented: $viewModel.showingCancelConfirmationAlert) {
                     Alert(
                         title: Text("Confirmation"),
@@ -106,11 +108,26 @@ struct AddCountView: View {
                 }
             }
             
+            ToolbarItem(placement: .secondaryAction) {
+                Button {
+                    // pull
+                    // toggle sheet
+                    self.showingAddItemView.toggle()
+                } label: {
+                    Text("Add Item")
+                }
+                .fullScreenCover(isPresented: $showingAddItemView, content: {
+                    AddItemView()
+                        .preferredColorScheme(.dark)
+                })
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     viewModel.showingSubmitConfirmationAlert = true
                 }) {
                     Text("Submit")
+                        .foregroundStyle(Color("Green1"))
                         .modifier(FontMod(size: 18, isBold: true))
                 }
                 .foregroundColor(Color.blue)
