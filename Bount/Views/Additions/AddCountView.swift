@@ -14,7 +14,7 @@ struct AddCountView: View {
 
     @FirestoreQuery(collectionPath: "items") var items: [Item]
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     @State private var showingAddItemView = false
     
@@ -53,7 +53,7 @@ struct AddCountView: View {
                             HStack {
                                 Text(item.name)
                                     .modifier(FontMod(size: 14, isBold: false))
-                                    .foregroundColor(.primary)
+                                    .foregroundColor(item.isActive ? .primary : .red)
 
                                 Spacer()
 
@@ -66,6 +66,14 @@ struct AddCountView: View {
                                     in: 0...Int.max
                                 )
                                 .modifier(FontMod(size: 14, isBold: true))
+                                
+//                                CustomStepper(
+//                                    value: Binding(
+//                                        get: { viewModel.itemCounts[item.id ?? ""] ?? 0 },
+//                                        set: { newValue in viewModel.itemCounts[item.id ?? ""] = newValue }
+//                                    ),
+//                                    range: 0...Int.max
+//                                )
                             }
                         }
                     }
@@ -100,7 +108,7 @@ struct AddCountView: View {
                         title: Text("Confirmation"),
                         message: Text("Are you sure you want to cancel this item?"),
                         primaryButton: .destructive(Text("Cancel")) {
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                             viewModel.reset()
                         },
                         secondaryButton: .cancel()
@@ -110,8 +118,6 @@ struct AddCountView: View {
             
             ToolbarItem(placement: .secondaryAction) {
                 Button {
-                    // pull
-                    // toggle sheet
                     self.showingAddItemView.toggle()
                 } label: {
                     Text("Add Item")
@@ -139,7 +145,7 @@ struct AddCountView: View {
                         primaryButton: .destructive(Text("Submit")) {
                             viewModel.uploadCountsToFirestore { success, error in
                                 if success {
-                                    presentationMode.wrappedValue.dismiss()
+                                    dismiss()
                                     viewModel.reset()
                                 } else {
                                     viewModel.showingErrorAlert = true
@@ -161,9 +167,7 @@ struct AddCountView: View {
     }
 }
 
-struct AddCountView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddCountView()
-            .preferredColorScheme(.dark)
-    }
+#Preview {
+    AddCountView()
+        .preferredColorScheme(.dark)
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8129D722C1C1655003FF49A /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8129D712C1C1655003FF49A /* CustomStepper.swift */; };
 		B8168D7E2AB7A0DA00E8AD46 /* AddCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8168D7D2AB7A0DA00E8AD46 /* AddCountView.swift */; };
 		B8168D802AB7FDFA00E8AD46 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8168D7F2AB7FDFA00E8AD46 /* Inventory.swift */; };
 		B8168D832AB8131600E8AD46 /* BreakdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8168D822AB8131600E8AD46 /* BreakdownView.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B8129D712C1C1655003FF49A /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
 		B8168D7D2AB7A0DA00E8AD46 /* AddCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCountView.swift; sourceTree = "<group>"; };
 		B8168D7F2AB7FDFA00E8AD46 /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
 		B8168D822AB8131600E8AD46 /* BreakdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakdownView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				B81824F12B9A5FD700F2218D /* CustomTabBar.swift */,
 				B81824FF2B9A763F00F2218D /* CustomTabBarItem.swift */,
 				B868F0462BA3AAC7000B54E7 /* InlineHeaderView.swift */,
+				B8129D712C1C1655003FF49A /* CustomStepper.swift */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				B825FFE02ABB695300EA8985 /* VendorInventoryVM.swift in Sources */,
 				B868F03A2BA2D4F7000B54E7 /* CountHistoryMonthView.swift in Sources */,
 				B848E7FC2AA6783900D0FFBD /* VendorVM.swift in Sources */,
+				B8129D722C1C1655003FF49A /* CustomStepper.swift in Sources */,
 				B8168D802AB7FDFA00E8AD46 /* Inventory.swift in Sources */,
 				B868F0312BA1300F000B54E7 /* LocationDetailView.swift in Sources */,
 				B825FFCE2AB8C0E300EA8985 /* AddCountVM.swift in Sources */,
