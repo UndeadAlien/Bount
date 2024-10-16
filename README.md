@@ -1,4 +1,4 @@
-# Bount
+# BountV2
 <i>An iOS application leveraging SwiftUI and Firebase, enabling users to submit and track item counts seamlessly. Implemented robust sorting algorithms for efficient data organization, facilitating easy access to both real-time and historical inventory counts.</i>
 
 <details>
@@ -15,5 +15,3 @@
   <summary><b>Item Counter</b></summary>
   <img src="https://imgur.com/nB4paKa.png" width="250" /> <img src="https://imgur.com/A2UBH5X.png" width="250" />
 </details>
-# BountV2
-# BountV2
